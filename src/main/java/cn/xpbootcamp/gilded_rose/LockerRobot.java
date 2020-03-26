@@ -1,5 +1,7 @@
 package cn.xpbootcamp.gilded_rose;
 
+import java.util.Objects;
+
 public class LockerRobot {
     private Bag bag;
 
@@ -8,7 +10,10 @@ public class LockerRobot {
         return new LockerTicket();
     }
 
-    public Bag pick(LockerTicket ticket) {
+    public Bag pick(LockerTicket ticket) throws NoTicketException {
+        if (Objects.isNull(ticket)) {
+            throw new NoTicketException();
+        }
         return bag;
     }
 }
