@@ -50,4 +50,16 @@ public class LockerRobotTest {
         Assertions.assertSame(bagOne, pickedOne);
         Assertions.assertSame(bagTwo, pickedTwo);
     }
+
+    @Test
+    void should_return_null_when_pick_bag_with_invalid_ticket() throws NoTicketException {
+        LockerRobot robot = new LockerRobot();
+        Bag bag = new Bag();
+        robot.lock(bag);
+        LockerTicket invalidTicket = new LockerTicket();
+
+        Bag picked = robot.pick(invalidTicket);
+
+        Assertions.assertNull(picked);
+    }
 }
