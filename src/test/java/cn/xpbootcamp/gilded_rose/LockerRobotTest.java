@@ -62,4 +62,16 @@ public class LockerRobotTest {
 
         Assertions.assertNull(picked);
     }
+
+    @Test
+    void should_not_return_bag_when_user_pick_bag_with_used_ticket() throws NoTicketException {
+        LockerRobot robot = new LockerRobot();
+        Bag bag = new Bag();
+        LockerTicket ticket = robot.lock(bag);
+        robot.pick(ticket);
+
+        Bag picked = robot.pick(ticket);
+
+        Assertions.assertNull(picked);
+    }
 }
