@@ -13,4 +13,15 @@ public class LockerRobotTest {
 
         Assertions.assertNotNull(ticket);
     }
+
+    @Test
+    void should_pick_bag_when_pick_by_the_ticket() {
+        LockerRobot robot = new LockerRobot();
+        Bag bag = new Bag();
+        LockerTicket ticket = robot.lock(bag);
+
+        Bag pickedBag = robot.pick(ticket);
+
+        Assertions.assertSame(bag, pickedBag);
+    }
 }
