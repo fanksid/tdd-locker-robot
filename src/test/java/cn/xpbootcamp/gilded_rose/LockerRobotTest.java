@@ -34,6 +34,20 @@ public class LockerRobotTest {
         Assertions.assertThrows(NoTicketException.class, () -> {
             robot.pick(null);
         });
+    }
 
+    @Test
+    void should_pick_the_right_bag_when_locker_has_multiple_bag_locker_given_the_ticket() throws NoTicketException {
+        LockerRobot robot = new LockerRobot();
+        Bag bagOne = new Bag();
+        Bag bagTwo = new Bag();
+        LockerTicket ticketOne = robot.lock(bagOne);
+        LockerTicket ticketTwo = robot.lock(bagTwo);
+
+        Bag pickedOne = robot.pick(ticketOne);
+        Bag pickedTwo = robot.pick(ticketTwo);
+
+        Assertions.assertSame(bagOne, pickedOne);
+        Assertions.assertSame(bagTwo, pickedTwo);
     }
 }
