@@ -31,6 +31,6 @@ public class PrimaryLockerRobot {
                 return locker.pick(ticket);
             }
         }
-        return lockers.get(0).pick(ticket);
+        return null;
     }
 }

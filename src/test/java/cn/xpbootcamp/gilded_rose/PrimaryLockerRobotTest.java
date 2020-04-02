@@ -57,4 +57,12 @@ public class PrimaryLockerRobotTest {
             robot.save(new Bag());
         });
     }
+
+    @Test
+    void robot_should_return_null_when_user_pick_with_invalid_ticket() throws NoTicketException {
+        PrimaryLockerRobot robot = new PrimaryLockerRobot(new Locker(1), new Locker(1));
+        LockerTicket invalidTicket = new LockerTicket();
+
+        Assertions.assertNull(robot.pick(invalidTicket));
+    }
 }
