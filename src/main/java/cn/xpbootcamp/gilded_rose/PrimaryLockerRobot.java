@@ -3,6 +3,7 @@ package cn.xpbootcamp.gilded_rose;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 public class PrimaryLockerRobot {
     private List<Locker> lockers = new ArrayList<>();
@@ -16,21 +17,20 @@ public class PrimaryLockerRobot {
     }
 
     public LockerTicket save(Bag bag) throws CapacityFullException {
-        for (Locker locker : lockers) {
-            if (locker.isFull()) {
-                continue;
-            }
-            return locker.save(bag);
+        Optional<Locker> locker = lockers.stream().filter(t -> !t.isFull()).findFirst();
+        if (locker.isPresent()) {
+            return locker.get().save(bag);
+        } else {
+            throw new CapacityFullException();
         }
-        throw new CapacityFullException();
     }
 
     public Bag pick(LockerTicket ticket) throws NoTicketException {
-        for (Locker locker : lockers) {
-            if (locker.isIn(ticket)) {
-                return locker.pick(ticket);
-            }
+        Optional<Locker> locker = lockers.stream().filter(t -> t.isIn(ticket)).findFirst();
+        if (locker.isPresent()) {
+            return locker.get().pick(ticket);
+        } else {
+            return null;
         }
-        return null;
     }
 }
