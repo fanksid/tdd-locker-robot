@@ -65,4 +65,13 @@ public class PrimaryLockerRobotTest {
 
         Assertions.assertNull(robot.pick(invalidTicket));
     }
+
+    @Test
+    void robot_should_return_null_when_user_pick_with_used_ticket() throws NoTicketException, CapacityFullException {
+        PrimaryLockerRobot robot = new PrimaryLockerRobot(new Locker(1), new Locker(1));
+        LockerTicket ticket = robot.save(new Bag());
+        robot.pick(ticket);
+
+        Assertions.assertNull(robot.pick(ticket));
+    }
 }
