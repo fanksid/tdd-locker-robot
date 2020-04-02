@@ -5,8 +5,8 @@ import org.junit.jupiter.api.Test;
 
 public class LockerRobotTest {
     @Test
-    void should_return_ticket_when_robot_lock_the_bag() {
-        LockerRobot robot = new LockerRobot();
+    void should_return_ticket_when_robot_lock_the_bag() throws CapacityFullException {
+        LockerRobot robot = new LockerRobot(1);
         Bag bag = new Bag();
 
         LockerTicket ticket = robot.lock(bag);
@@ -15,8 +15,8 @@ public class LockerRobotTest {
     }
 
     @Test
-    void should_pick_bag_when_pick_by_the_ticket() throws NoTicketException {
-        LockerRobot robot = new LockerRobot();
+    void should_pick_bag_when_pick_by_the_ticket() throws NoTicketException, CapacityFullException {
+        LockerRobot robot = new LockerRobot(1);
         Bag bag = new Bag();
         LockerTicket ticket = robot.lock(bag);
 
@@ -26,8 +26,8 @@ public class LockerRobotTest {
     }
 
     @Test()
-    void should_throw_exception_when_user_pick_bag_with_no_ticket() {
-        LockerRobot robot = new LockerRobot();
+    void should_throw_exception_when_user_pick_bag_with_no_ticket() throws CapacityFullException {
+        LockerRobot robot = new LockerRobot(1);
         Bag bag = new Bag();
         robot.lock(bag);
 
@@ -37,8 +37,8 @@ public class LockerRobotTest {
     }
 
     @Test
-    void should_pick_the_right_bag_when_locker_has_multiple_bag_locker_given_the_ticket() throws NoTicketException {
-        LockerRobot robot = new LockerRobot();
+    void should_pick_the_right_bag_when_locker_has_multiple_bag_locker_given_the_ticket() throws NoTicketException, CapacityFullException {
+        LockerRobot robot = new LockerRobot(2);
         Bag bagOne = new Bag();
         Bag bagTwo = new Bag();
         LockerTicket ticketOne = robot.lock(bagOne);
@@ -52,8 +52,8 @@ public class LockerRobotTest {
     }
 
     @Test
-    void should_return_null_when_pick_bag_with_invalid_ticket() throws NoTicketException {
-        LockerRobot robot = new LockerRobot();
+    void should_return_null_when_pick_bag_with_invalid_ticket() throws NoTicketException, CapacityFullException {
+        LockerRobot robot = new LockerRobot(1);
         Bag bag = new Bag();
         robot.lock(bag);
         LockerTicket invalidTicket = new LockerTicket();
@@ -64,8 +64,8 @@ public class LockerRobotTest {
     }
 
     @Test
-    void should_not_return_bag_when_user_pick_bag_with_used_ticket() throws NoTicketException {
-        LockerRobot robot = new LockerRobot();
+    void should_not_return_bag_when_user_pick_bag_with_used_ticket() throws NoTicketException, CapacityFullException {
+        LockerRobot robot = new LockerRobot(1);
         Bag bag = new Bag();
         LockerTicket ticket = robot.lock(bag);
         robot.pick(ticket);
@@ -73,5 +73,15 @@ public class LockerRobotTest {
         Bag picked = robot.pick(ticket);
 
         Assertions.assertNull(picked);
+    }
+
+    @Test
+    void should_throw_exception_when_capacity_is_full() throws CapacityFullException {
+        LockerRobot robot = new LockerRobot(1);
+        robot.lock(new Bag());
+
+        Assertions.assertThrows(CapacityFullException.class, () -> {
+            robot.lock(new Bag());
+        });
     }
 }

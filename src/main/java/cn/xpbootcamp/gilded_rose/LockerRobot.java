@@ -6,8 +6,16 @@ import java.util.Objects;
 
 public class LockerRobot {
     private Map<LockerTicket, Bag> locker = new HashMap<>();
+    private int capacity;
 
-    public LockerTicket lock(Bag bag) {
+    public LockerRobot(int capacity) {
+        this.capacity = capacity;
+    }
+
+    public LockerTicket lock(Bag bag) throws CapacityFullException {
+        if (locker.size() >= capacity) {
+            throw new CapacityFullException();
+        }
         LockerTicket ticket = new LockerTicket();
         locker.put(ticket, bag);
         return ticket;
