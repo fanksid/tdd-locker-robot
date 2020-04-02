@@ -12,7 +12,7 @@ public class LockerRobot {
         this.capacity = capacity;
     }
 
-    public LockerTicket lock(Bag bag) throws CapacityFullException {
+    public LockerTicket save(Bag bag) throws CapacityFullException {
         if (locker.size() >= capacity) {
             throw new CapacityFullException();
         }
