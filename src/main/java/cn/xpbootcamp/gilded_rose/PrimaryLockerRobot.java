@@ -22,7 +22,7 @@ public class PrimaryLockerRobot {
             }
             return locker.save(bag);
         }
-        return lockers.get(0).save(bag);
+        throw new CapacityFullException();
     }
 
     public Bag pick(LockerTicket ticket) throws NoTicketException {

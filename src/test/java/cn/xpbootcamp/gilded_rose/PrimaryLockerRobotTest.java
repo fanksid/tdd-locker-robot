@@ -44,4 +44,17 @@ public class PrimaryLockerRobotTest {
         ticket = robot.save(bag);
         Assertions.assertSame(bag, robot.pick(ticket));
     }
+
+    @Test
+    void robot_should_throw_full_exception_given_two_full_locker_when_user_save_bag() throws CapacityFullException {
+        Locker locker1 = new Locker(1);
+        Locker locker2 = new Locker(1);
+        PrimaryLockerRobot robot = new PrimaryLockerRobot(locker1, locker2);
+        robot.save(new Bag());
+        robot.save(new Bag());
+
+        Assertions.assertThrows(CapacityFullException.class, () -> {
+            robot.save(new Bag());
+        });
+    }
 }
