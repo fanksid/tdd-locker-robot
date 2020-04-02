@@ -4,11 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class LockerRobot {
+public class Locker {
     private Map<LockerTicket, Bag> locker = new HashMap<>();
     private int capacity;
 
-    public LockerRobot(int capacity) {
+    public Locker(int capacity) {
         this.capacity = capacity;
     }
 
