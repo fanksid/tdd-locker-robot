@@ -15,4 +15,18 @@ public class PrimaryLockerRobotTest {
 
         Assertions.assertSame(bag, picked);
     }
+
+    @Test
+    void robot_should_return_bag_from_first_locker_given_two_empty_locker_when_user_pick_bag() throws NoTicketException, CapacityFullException {
+        Locker locker1 = new Locker(1);
+        Locker locker2 = new Locker(1);
+        PrimaryLockerRobot robot = new PrimaryLockerRobot(locker1, locker2);
+        Bag bag = new Bag();
+
+        LockerTicket ticket = robot.save(bag);
+        Assertions.assertSame(bag, locker1.pick(ticket));
+
+        ticket = robot.save(bag);
+        Assertions.assertSame(bag, robot.pick(ticket));
+    }
 }
