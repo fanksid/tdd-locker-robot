@@ -27,4 +27,12 @@ public class Locker {
         }
         return locker.remove(ticket);
     }
+
+    public boolean isFull() {
+        return capacity == locker.size();
+    }
+
+    public boolean isIn(LockerTicket ticket) {
+        return locker.containsKey(ticket);
+    }
 }

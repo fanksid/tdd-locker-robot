@@ -16,10 +16,21 @@ public class PrimaryLockerRobot {
     }
 
     public LockerTicket save(Bag bag) throws CapacityFullException {
+        for (Locker locker : lockers) {
+            if (locker.isFull()) {
+                continue;
+            }
+            return locker.save(bag);
+        }
         return lockers.get(0).save(bag);
     }
 
     public Bag pick(LockerTicket ticket) throws NoTicketException {
+        for (Locker locker : lockers) {
+            if (locker.isIn(ticket)) {
+                return locker.pick(ticket);
+            }
+        }
         return lockers.get(0).pick(ticket);
     }
 }
