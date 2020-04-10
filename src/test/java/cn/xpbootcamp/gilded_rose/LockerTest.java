@@ -15,7 +15,7 @@ public class LockerTest {
     }
 
     @Test
-    void should_pick_bag_when_pick_by_the_ticket() throws NoTicketException, CapacityFullException {
+    void should_pick_bag_when_pick_by_the_ticket() throws InvalidTicketException, CapacityFullException {
         Locker locker = new Locker(1);
         Bag bag = new Bag();
         LockerTicket ticket = locker.save(bag);
@@ -31,13 +31,13 @@ public class LockerTest {
         Bag bag = new Bag();
         locker.save(bag);
 
-        Assertions.assertThrows(NoTicketException.class, () -> {
+        Assertions.assertThrows(InvalidTicketException.class, () -> {
             locker.pick(null);
         });
     }
 
     @Test
-    void should_pick_the_right_bag_when_locker_has_multiple_bag_locker_given_the_ticket() throws NoTicketException, CapacityFullException {
+    void should_pick_the_right_bag_when_locker_has_multiple_bag_locker_given_the_ticket() throws InvalidTicketException, CapacityFullException {
         Locker locker = new Locker(2);
         Bag bagOne = new Bag();
         Bag bagTwo = new Bag();
@@ -52,7 +52,7 @@ public class LockerTest {
     }
 
     @Test
-    void should_return_null_when_pick_bag_with_invalid_ticket() throws NoTicketException, CapacityFullException {
+    void should_return_null_when_pick_bag_with_invalid_ticket() throws InvalidTicketException, CapacityFullException {
         Locker locker = new Locker(1);
         Bag bag = new Bag();
         locker.save(bag);
@@ -64,7 +64,7 @@ public class LockerTest {
     }
 
     @Test
-    void should_not_return_bag_when_user_pick_bag_with_used_ticket() throws NoTicketException, CapacityFullException {
+    void should_not_return_bag_when_user_pick_bag_with_used_ticket() throws InvalidTicketException, CapacityFullException {
         Locker locker = new Locker(1);
         Bag bag = new Bag();
         LockerTicket ticket = locker.save(bag);

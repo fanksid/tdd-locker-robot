@@ -21,9 +21,9 @@ public class Locker {
         return ticket;
     }
 
-    public Bag pick(LockerTicket ticket) throws NoTicketException {
+    public Bag pick(LockerTicket ticket) throws InvalidTicketException {
         if (Objects.isNull(ticket)) {
-            throw new NoTicketException();
+            throw new InvalidTicketException();
         }
         return locker.remove(ticket);
     }

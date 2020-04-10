@@ -25,12 +25,12 @@ public class PrimaryLockerRobot {
         }
     }
 
-    public Bag pick(LockerTicket ticket) throws NoTicketException {
+    public Bag pick(LockerTicket ticket) throws InvalidTicketException {
         Optional<Locker> locker = lockers.stream().filter(t -> t.isIn(ticket)).findFirst();
         if (locker.isPresent()) {
             return locker.get().pick(ticket);
         } else {
-            return null;
+            throw new InvalidTicketException();
         }
     }
 }
