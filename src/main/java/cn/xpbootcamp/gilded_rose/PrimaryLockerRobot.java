@@ -17,7 +17,7 @@ public class PrimaryLockerRobot {
     }
 
     public LockerTicket save(Bag bag) throws CapacityFullException {
-        Optional<Locker> locker = lockers.stream().filter(t -> !t.isFull()).findFirst();
+        Optional<Locker> locker = lockers.stream().filter(t -> t.hasSpace()).findFirst();
         if (locker.isPresent()) {
             return locker.get().save(bag);
         } else {
