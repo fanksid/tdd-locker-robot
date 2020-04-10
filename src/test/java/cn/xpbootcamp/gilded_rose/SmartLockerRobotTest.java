@@ -44,4 +44,15 @@ public class SmartLockerRobotTest {
         ticket = robot.save(bag);
         Assertions.assertSame(bag, robot.pick(ticket));
     }
+
+    @Test
+    void smart_robot_should_throw_exception_given_robot_has_one_full_locker_when_save_bag() throws CapacityFullException {
+        Locker locker1 = new Locker(1);
+        SmartLockerRobot robot = new SmartLockerRobot(locker1);
+        robot.save(new Bag());
+
+        Assertions.assertThrows(CapacityFullException.class, () -> {
+            robot.save(new Bag());
+        });
+    }
 }
