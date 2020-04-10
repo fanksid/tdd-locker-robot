@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 public class PrimaryLockerRobotTest {
     @Test
-    void robot_should_return_ticket_and_pick_bag_with_the_ticket_given_robot_has_one_locker_when_save_and_pick_() throws InvalidTicketException, CapacityFullException {
+    void robot_should_return_ticket_and_pick_bag_with_the_ticket_given_robot_has_one_locker_when_save_and_pick() throws InvalidTicketException, CapacityFullException {
         Locker locker = new Locker(1);
         PrimaryLockerRobot robot = new PrimaryLockerRobot(locker);
         Bag bag = new Bag();
