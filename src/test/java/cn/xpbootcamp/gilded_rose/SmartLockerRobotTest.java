@@ -55,4 +55,14 @@ public class SmartLockerRobotTest {
             robot.save(new Bag());
         });
     }
+
+    @Test
+    void smart_robot_should_throw_exception_given_robot_has_one_locker_when_pick_with_invalid_ticket() {
+        SmartLockerRobot robot = new SmartLockerRobot(new Locker(1));
+        LockerTicket invalidTicket = new LockerTicket();
+
+        Assertions.assertThrows(InvalidTicketException.class, () -> {
+            robot.pick(invalidTicket);
+        });
+    }
 }
