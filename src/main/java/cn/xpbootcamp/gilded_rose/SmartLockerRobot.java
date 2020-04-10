@@ -7,6 +7,10 @@ public class SmartLockerRobot {
         this.locker = locker;
     }
 
+    public SmartLockerRobot(Locker... lockers) {
+        this.locker = lockers[0];
+    }
+
     public LockerTicket save(Bag bag) throws CapacityFullException {
         return locker.save(bag);
     }
