@@ -65,4 +65,15 @@ public class SmartLockerRobotTest {
             robot.pick(invalidTicket);
         });
     }
+
+    @Test
+    void smart_robot_should_throw_exception_given_robot_has_one_locker_when_pick_with_used_ticket() throws InvalidTicketException, CapacityFullException {
+        SmartLockerRobot robot = new SmartLockerRobot(new Locker(1));
+        LockerTicket ticket = robot.save(new Bag());
+        robot.pick(ticket);
+
+        Assertions.assertThrows(InvalidTicketException.class, () -> {
+            robot.pick(ticket);
+        });
+    }
 }
