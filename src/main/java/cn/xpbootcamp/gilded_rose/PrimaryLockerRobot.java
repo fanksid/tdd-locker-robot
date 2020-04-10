@@ -1,36 +1,15 @@
 package cn.xpbootcamp.gilded_rose;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.Comparator;
 
-public class PrimaryLockerRobot {
-    private List<Locker> lockers = new ArrayList<>();
-
-    public PrimaryLockerRobot(Locker locker) {
-        this.lockers.add(locker);
-    }
+public class PrimaryLockerRobot extends LockerRobot {
 
     public PrimaryLockerRobot(Locker... lockers) {
-        this.lockers = Arrays.asList(lockers);
+        super(lockers);
     }
 
-    public LockerTicket save(Bag bag) throws CapacityFullException {
-        Optional<Locker> locker = lockers.stream().filter(t -> t.hasSpace()).findFirst();
-        if (locker.isPresent()) {
-            return locker.get().save(bag);
-        } else {
-            throw new CapacityFullException();
-        }
+    public Comparator<Locker> sort() {
+        return (o1, o2) -> 0;
     }
 
-    public Bag pick(LockerTicket ticket) throws InvalidTicketException {
-        Optional<Locker> locker = lockers.stream().filter(t -> t.isIn(ticket)).findFirst();
-        if (locker.isPresent()) {
-            return locker.get().pick(ticket);
-        } else {
-            throw new InvalidTicketException();
-        }
-    }
 }
