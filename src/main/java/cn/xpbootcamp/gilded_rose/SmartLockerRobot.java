@@ -10,6 +10,6 @@ public class SmartLockerRobot extends LockerRobot {
     }
 
     public Comparator<Locker> sort() {
-        return comparingInt(Locker::getEmptySpaceSize).reversed();
+        return comparingInt(Locker::getAvailableSpaceSize).reversed();
     }
 }

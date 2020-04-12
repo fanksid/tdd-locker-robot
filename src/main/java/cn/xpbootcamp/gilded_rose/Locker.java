@@ -36,7 +36,7 @@ public class Locker {
         return locker.containsKey(ticket);
     }
 
-    public int getEmptySpaceSize() {
+    public int getAvailableSpaceSize() {
         return capacity - locker.size();
     }
 }
