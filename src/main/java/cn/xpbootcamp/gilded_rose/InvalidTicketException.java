@@ -1,6 +1,6 @@
 package cn.xpbootcamp.gilded_rose;
 
-public class InvalidTicketException extends Throwable {
+public class InvalidTicketException extends RuntimeException {
     public InvalidTicketException() {
     }
 }

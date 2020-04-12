@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 public class LockerTest {
     @Test
-    void should_return_ticket_when_locker_lock_the_bag() throws CapacityFullException {
+    void should_return_ticket_when_locker_lock_the_bag() {
         Locker locker = new Locker(1);
         Bag bag = new Bag();
 
@@ -15,7 +15,7 @@ public class LockerTest {
     }
 
     @Test
-    void should_pick_bag_when_pick_by_the_ticket() throws InvalidTicketException, CapacityFullException {
+    void should_pick_bag_when_pick_by_the_ticket() {
         Locker locker = new Locker(1);
         Bag bag = new Bag();
         LockerTicket ticket = locker.save(bag);
@@ -26,7 +26,7 @@ public class LockerTest {
     }
 
     @Test()
-    void should_throw_exception_when_user_pick_bag_with_no_ticket() throws CapacityFullException {
+    void should_throw_exception_when_user_pick_bag_with_no_ticket() {
         Locker locker = new Locker(1);
         Bag bag = new Bag();
         locker.save(bag);
@@ -37,7 +37,7 @@ public class LockerTest {
     }
 
     @Test
-    void should_pick_the_right_bag_when_locker_has_multiple_bag_locker_given_the_ticket() throws InvalidTicketException, CapacityFullException {
+    void should_pick_the_right_bag_when_locker_has_multiple_bag_locker_given_the_ticket() {
         Locker locker = new Locker(2);
         Bag bagOne = new Bag();
         Bag bagTwo = new Bag();
@@ -52,7 +52,7 @@ public class LockerTest {
     }
 
     @Test
-    void should_return_null_when_pick_bag_with_invalid_ticket() throws InvalidTicketException, CapacityFullException {
+    void should_return_null_when_pick_bag_with_invalid_ticket() {
         Locker locker = new Locker(1);
         Bag bag = new Bag();
         locker.save(bag);
@@ -64,7 +64,7 @@ public class LockerTest {
     }
 
     @Test
-    void should_not_return_bag_when_user_pick_bag_with_used_ticket() throws InvalidTicketException, CapacityFullException {
+    void should_not_return_bag_when_user_pick_bag_with_used_ticket() {
         Locker locker = new Locker(1);
         Bag bag = new Bag();
         LockerTicket ticket = locker.save(bag);
@@ -76,7 +76,7 @@ public class LockerTest {
     }
 
     @Test
-    void should_throw_exception_when_capacity_is_full() throws CapacityFullException {
+    void should_throw_exception_when_capacity_is_full() {
         Locker locker = new Locker(1);
         locker.save(new Bag());
 

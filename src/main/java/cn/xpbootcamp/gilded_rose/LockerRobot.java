@@ -14,7 +14,7 @@ public abstract class LockerRobot {
 
     abstract Comparator<Locker> sort();
 
-    public LockerTicket save(Bag bag) throws CapacityFullException {
+    public LockerTicket save(Bag bag) {
         Optional<Locker> locker = lockers.stream()
                 .sorted(sort())
                 .filter(Locker::hasSpace)
@@ -27,7 +27,7 @@ public abstract class LockerRobot {
         }
     }
 
-    public Bag pick(LockerTicket ticket) throws InvalidTicketException {
+    public Bag pick(LockerTicket ticket) {
         Optional<Locker> locker = lockers.stream()
                 .filter(t -> t.isIn(ticket))
                 .findFirst();

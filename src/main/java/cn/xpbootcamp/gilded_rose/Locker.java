@@ -12,7 +12,7 @@ public class Locker {
         this.capacity = capacity;
     }
 
-    public LockerTicket save(Bag bag) throws CapacityFullException {
+    public LockerTicket save(Bag bag) {
         if (locker.size() >= capacity) {
             throw new CapacityFullException();
         }
@@ -21,7 +21,7 @@ public class Locker {
         return ticket;
     }
 
-    public Bag pick(LockerTicket ticket) throws InvalidTicketException {
+    public Bag pick(LockerTicket ticket) {
         if (Objects.isNull(ticket)) {
             throw new InvalidTicketException();
         }
