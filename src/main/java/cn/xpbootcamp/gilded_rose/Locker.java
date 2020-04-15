@@ -39,4 +39,8 @@ public class Locker {
     public int getAvailableSpaceSize() {
         return capacity - locker.size();
     }
+
+    public double getEmptySpaceRate() {
+        return 1.0 * (capacity - locker.size()) / capacity;
+    }
 }

@@ -1,6 +1,7 @@
 package cn.xpbootcamp.gilded_rose;
 
 import java.util.Comparator;
+import static java.util.Comparator.comparingDouble;
 
 public class SuperLockerRobot extends LockerRobot {
     public SuperLockerRobot(Locker... lockers) {
@@ -9,6 +10,6 @@ public class SuperLockerRobot extends LockerRobot {
 
     @Override
     Comparator<Locker> sort() {
-        return (k1, k2) -> 0;
+        return comparingDouble(Locker::getEmptySpaceRate).reversed();
     }
 }
