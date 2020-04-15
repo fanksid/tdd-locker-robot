@@ -61,4 +61,36 @@ public class SuperLockerRobotTest {
         Assertions.assertSame(bag, robot.pick(ticket));
     }
 
+    @Test
+    void should_throw_exception_given_robot_has_one_full_locker_when_save_bag() {
+        Locker locker1 = new Locker(1);
+        SuperLockerRobot robot = new SuperLockerRobot(locker1);
+        robot.save(new Bag());
+
+        Assertions.assertThrows(CapacityFullException.class, () -> {
+            robot.save(new Bag());
+        });
+    }
+
+    @Test
+    void should_throw_exception_given_robot_has_one_locker_when_pick_with_invalid_ticket() {
+        SuperLockerRobot robot = new SuperLockerRobot(new Locker(1));
+        LockerTicket invalidTicket = new LockerTicket();
+
+        Assertions.assertThrows(InvalidTicketException.class, () -> {
+            robot.pick(invalidTicket);
+        });
+    }
+
+    @Test
+    void should_throw_exception_given_robot_has_one_locker_when_pick_with_used_ticket() {
+        SuperLockerRobot robot = new SuperLockerRobot(new Locker(1));
+        LockerTicket ticket = robot.save(new Bag());
+        robot.pick(ticket);
+
+        Assertions.assertThrows(InvalidTicketException.class, () -> {
+            robot.pick(ticket);
+        });
+    }
+
 }
